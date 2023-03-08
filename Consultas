@@ -1,0 +1,52 @@
+-- una vez insertado los datos en las tablas, se realizaran consultas 
+-- sobre datos que la empresa podria llegar a necesitar para la toma de decisiones.alter
+
+
+# Consulta del total de ventas #
+select sum(total_venta) from ventas;
+
+Select count(total_venta) from ventas;
+
+select avg(total_venta) from ventas;
+
+select * from ventas;
+
+#ventas obtenidas en un periodo determinado#
+
+select sum(total_venta) as total_ventas
+from ventas
+where fecha_venta between "2022-01.04" and "2022-01-06";
+
+select sum(total_venta) as ventas_1eros5dias
+from ventas 
+where fecha_venta between "2022-01-01" and "2022-01-07";
+
+#Obtener la cantidad de ventas realizadas por cada cliente#
+
+select id_cliente, count(*) as total_ventas
+from ventas 
+group by id_cliente;
+
+#producto mas vendido y su cantidad de ventas#
+select id_producto, count(*) as total_ventas
+from ventas 
+group by id_producto
+order by total_ventas desc
+limit 1;
+
+
+select * from clientes;
+
+#seleccionar a los clientes que su correo termina con gmail.com#
+select nombre_cliente from clientes
+where email_cliente like "%@gmail.com";
+
+select * from ventas;
+
+#INNER JOIN e/tabla ventas y tabla clientes#
+
+Select nombre_cliente, direccion_cliente, telefono_cliente, email_cliente, 
+from clientes
+inner join ventas
+on clientes.id_cliente = ventas.id_cliente;
+
